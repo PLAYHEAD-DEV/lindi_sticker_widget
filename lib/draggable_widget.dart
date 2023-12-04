@@ -8,6 +8,11 @@ class DraggableWidget extends StatelessWidget {
   /// Properties to customize the appearance and behavior of the widget.
   ///
   Widget child;
+  Widget? done;
+  Widget? close;
+  Widget? flip;
+  Widget? stack;
+  Widget? lock;
   Color borderColor;
   Color iconColor;
   bool showDone;
@@ -83,7 +88,12 @@ class DraggableWidget extends StatelessWidget {
       required this.maxScale,
       required this.onBorder,
       required this.onDelete,
-      required this.onLayer});
+      required this.onLayer,
+      this.done,
+      this.close,
+      this.flip,
+      this.stack,
+      this.lock});
 
   // Method to update the widget's border visibility.
   update(border) {
@@ -173,84 +183,88 @@ class DraggableWidget extends StatelessWidget {
                         // Widgets for interaction (e.g., delete, flip, etc.).
                         if (showAllBorders && _showBorder && showDone)
                           Positioned(
-                            right: 0,
+                            left: 0,
                             child: GestureDetector(
                               onTap: () {
                                 _done();
                               },
-                              child: SizedBox(
-                                width: circleSize,
-                                height: circleSize,
-                                child: CircleAvatar(
-                                    backgroundColor: borderColor,
-                                    child: Icon(
-                                      Icons.done,
-                                      size: iconSize,
-                                      color: iconColor,
-                                    )),
-                              ),
+                              child: done ??
+                                  SizedBox(
+                                    width: circleSize,
+                                    height: circleSize,
+                                    child: CircleAvatar(
+                                        backgroundColor: borderColor,
+                                        child: Icon(
+                                          Icons.done,
+                                          size: iconSize,
+                                          color: iconColor,
+                                        )),
+                                  ),
                             ),
                           ),
                         if (showAllBorders && _showBorder && showClose)
                           Positioned(
-                            left: 0,
+                            right: 0,
                             child: GestureDetector(
                               onTap: () {
                                 onDelete(key);
                               },
-                              child: SizedBox(
-                                width: circleSize,
-                                height: circleSize,
-                                child: CircleAvatar(
-                                    backgroundColor: borderColor,
-                                    child: Icon(
-                                      Icons.close,
-                                      size: iconSize,
-                                      color: iconColor,
-                                    )),
-                              ),
+                              child: close ??
+                                  SizedBox(
+                                    width: circleSize,
+                                    height: circleSize,
+                                    child: CircleAvatar(
+                                        backgroundColor: borderColor,
+                                        child: Icon(
+                                          Icons.close,
+                                          size: iconSize,
+                                          color: iconColor,
+                                        )),
+                                  ),
                             ),
                           ),
                         if (showAllBorders && _showBorder && showFlip)
                           Positioned(
                             bottom: 0,
-                            left: 0,
+                            right: 0,
                             child: GestureDetector(
                               onTap: () {
                                 _flip();
                               },
-                              child: SizedBox(
-                                width: circleSize,
-                                height: circleSize,
-                                child: CircleAvatar(
-                                    backgroundColor: borderColor,
-                                    child: Icon(
-                                      Icons.flip,
-                                      size: iconSize,
-                                      color: iconColor,
-                                    )),
-                              ),
+                              child: flip ??
+                                  SizedBox(
+                                    width: circleSize,
+                                    height: circleSize,
+                                    child: CircleAvatar(
+                                        backgroundColor: borderColor,
+                                        child: Icon(
+                                          Icons.flip,
+                                          size: iconSize,
+                                          color: iconColor,
+                                        )),
+                                  ),
                             ),
                           ),
                         if (showAllBorders && _showBorder && showStack)
                           Positioned(
                             bottom: 0,
-                            right: 0,
+                            left: 0,
                             child: GestureDetector(
                               onTap: () {
                                 onLayer(key);
                               },
-                              child: SizedBox(
-                                width: circleSize,
-                                height: circleSize,
-                                child: CircleAvatar(
-                                    backgroundColor: borderColor,
-                                    child: Icon(
-                                      Icons.layers,
-                                      size: iconSize,
-                                      color: iconColor,
-                                    )),
-                              ),
+                              child: stack ??
+                                  SizedBox(
+                                    width: circleSize,
+                                    height: circleSize,
+                                    child: CircleAvatar(
+                                        backgroundColor: borderColor,
+                                        child: Icon(
+                                          Icons.layers,
+                                          size: iconSize,
+                                          color: iconColor,
+                                        )),
+                                  ),
                             ),
                           ),
                         if (showAllBorders && _showBorder && showLock)
@@ -261,17 +275,20 @@ class DraggableWidget extends StatelessWidget {
                               onTap: () {
                                 _lock();
                               },
-                              child: SizedBox(
-                                width: circleSize,
-                                height: circleSize,
-                                child: CircleAvatar(
-                                    backgroundColor: borderColor,
-                                    child: Icon(
-                                      _isLock ? Icons.lock : Icons.lock_open,
-                                      size: iconSize,
-                                      color: iconColor,
-                                    )),
-                              ),
+                              child: lock ??
+                                  SizedBox(
+                                    width: circleSize,
+                                    height: circleSize,
+                                    child: CircleAvatar(
+                                        backgroundColor: borderColor,
+                                        child: Icon(
+                                          _isLock
+                                              ? Icons.lock
+                                              : Icons.lock_open,
+                                          size: iconSize,
+                                          color: iconColor,
+                                        )),
+                                  ),
                             ),
                           ),
                       ],

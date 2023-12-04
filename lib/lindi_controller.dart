@@ -94,22 +94,34 @@ class LindiController extends ChangeNotifier {
   ///
   double maxScale;
 
+  Widget? done;
+  Widget? close;
+  Widget? flip;
+  Widget? stack;
+  Widget? lock;
+
   /// Constructor to initialize properties with default values.
   ///
-  LindiController(
-      {this.borderColor = Colors.blue,
-      this.iconColor = Colors.white,
-      this.showDone = true,
-      this.showClose = true,
-      this.showFlip = true,
-      this.showStack = true,
-      this.showLock = true,
-      this.showAllBorders = true,
-      this.shouldMove = true,
-      this.shouldRotate = true,
-      this.shouldScale = true,
-      this.minScale = 0.5,
-      this.maxScale = 4});
+  LindiController({
+    this.borderColor = Colors.blue,
+    this.iconColor = Colors.white,
+    this.showDone = true,
+    this.showClose = true,
+    this.showFlip = true,
+    this.showStack = true,
+    this.showLock = true,
+    this.showAllBorders = true,
+    this.shouldMove = true,
+    this.shouldRotate = true,
+    this.shouldScale = true,
+    this.minScale = 0.5,
+    this.maxScale = 4,
+    this.done,
+    this.close,
+    this.flip,
+    this.stack,
+    this.lock,
+  });
 
   // Method to add a widget to the list of draggable widgets.
   addWidget(Widget widget) {
@@ -119,6 +131,11 @@ class LindiController extends ChangeNotifier {
     // Create a DraggableWidget with specified properties.
     widgets.add(DraggableWidget(
         key: key,
+        done: done,
+        close: close,
+        flip: flip,
+        stack: stack,
+        lock: lock,
         borderColor: borderColor,
         iconColor: iconColor,
         showDone: showDone,
